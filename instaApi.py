@@ -18,3 +18,17 @@ def searchUser(username):
     response = requests.request("GET", url, headers=headers, params=querystring)
 
     return response.json()['user_id']
+
+def searchStory(id):
+    url = "https://instagram-scraper2.p.rapidapi.com/stories"
+
+    querystring = {"user_id": f"{id}"}
+
+    headers = {
+        "X-RapidAPI-Key": os.getenv('api_key'),
+        "X-RapidAPI-Host": "instagram-scraper2.p.rapidapi.com"
+    }
+
+    response = requests.request("GET", url, headers=headers, params=querystring)
+
+    return response.json()
