@@ -1,6 +1,6 @@
 import instaApi
 
-name = input("Enter username of link: ")
+name = input("Enter username or link: ")
 
 
 # function that filter name
@@ -17,5 +17,17 @@ def validateName(name):
 
 try:
     id = instaApi.searchUser(validateName(name))
+    print(id)
 except:
     print("enter valid name")
+
+try:
+    for i in instaApi.searchStory(id)['reel']['items']:
+        if "video_versions" not in i:
+            link = i["image_versions2"]["candidates"][0]["url"]
+            print(f"image: {link}")
+        else:
+            link = i['video_versions'][0]["url"]
+            print(f"video: {link}")
+except:
+    print("error processing data")
